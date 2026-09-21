@@ -1,0 +1,30 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Fantasy Premier League 2025-26",
+    "section": "",
+    "text": "In Fantasy Premier League (FPL), managers face a key budgetary question: does paying top price for premium assets consistently produce higher match returns, or does price matter more for certain positions than others? This analysis examines the relationship between player cost and weekly points scored across player positions in the 2025–26 season."
+  },
+  {
+    "objectID": "index.html#overview",
+    "href": "index.html#overview",
+    "title": "Fantasy Premier League 2025-26",
+    "section": "",
+    "text": "In Fantasy Premier League (FPL), managers face a key budgetary question: does paying top price for premium assets consistently produce higher match returns, or does price matter more for certain positions than others? This analysis examines the relationship between player cost and weekly points scored across player positions in the 2025–26 season."
+  },
+  {
+    "objectID": "index.html#data",
+    "href": "index.html#data",
+    "title": "Fantasy Premier League 2025-26",
+    "section": "Data",
+    "text": "Data\nThe dataset is sourced from the vaastav/Fantasy-Premier-League repository. Each row records an individual player’s performance in a given gameweek. We filter for appearances where the athlete played at least one minute (minutes &gt; 0), yielding over eleven thousand observations."
+  },
+  {
+    "objectID": "index.html#key-findings",
+    "href": "index.html#key-findings",
+    "title": "Fantasy Premier League 2025-26",
+    "section": "Key Findings",
+    "text": "Key Findings\n\nAttacking return on investment: Midfielders and forwards exhibit the steepest positive slopes, meaning premium prices translate into significantly higher match scores via goals, assists, and bonus points.\nDefensive ceilings: Goalkeepers and defenders display nearly flat trendlines. Higher-priced defenders rarely generate higher individual match totals than budget options, because clean-sheet points depend on overall team defense rather than individual player cost.\nSample scale: With 11,498 match observations, this sample captures both routine weekly appearances and outlier performances across the entire league."
+  }
+]
