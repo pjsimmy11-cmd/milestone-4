@@ -1,0 +1,60 @@
+---
+title: "Fantasy Premier League 2025-26"
+---
+
+## Overview
+
+In Fantasy Premier League (FPL), managers face a key budgetary question: does paying top price for premium assets consistently produce higher match returns, or does price matter more for certain positions than others? This analysis examines the relationship between player cost and weekly points scored across player positions in the 2025–26 season.
+
+## Data
+
+The dataset is sourced from the [vaastav/Fantasy-Premier-League](https://github.com/vaastav/Fantasy-Premier-League) repository. Each row records an individual player's performance in a given gameweek. We filter for appearances where the athlete played at least one minute (`minutes > 0`), yielding over eleven thousand observations.
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+library(tidyverse)
+
+# Read the matchweek-level player dataset
+gw_data <- read_csv("data/merged_gw.csv", show_col_types = FALSE)
+
+# Filter for players who actively played in a match
+active_appearances <- gw_data |>
+  filter(minutes > 0)
+
+# Plot fantasy points scored vs player price by position
+active_appearances |>
+  mutate(position = case_match(
+    position,
+    "DEF" ~ "Defenders",
+    "FWD" ~ "Forwards",
+    "GK"  ~ "Goalkeepers",
+    "MID" ~ "Midfielders"
+  )) |>
+  ggplot(aes(x = value / 10, y = total_points, color = position)) +
+  geom_jitter(alpha = 0.2, size = 1.2, width = 0.08, height = 0.2) +
+  geom_smooth(method = "lm", color = "black", linewidth = 0.8) +
+  facet_wrap(~ position) +
+  scale_x_continuous(labels = scales::dollar_format(prefix = "£", suffix = "M")) +
+  scale_color_brewer(palette = "Dark2") +
+  labs(
+    title = "Expensive Attackers Yield Higher Returns Than Costly Defenders",
+    subtitle = paste0("Fantasy points scored versus player price across ", scales::comma(nrow(active_appearances)), " match appearances (2025-26)"),
+    x = "Player Cost (£ Millions)",
+    y = "Gameweek Fantasy Points",
+    caption = "Source: vaastav/Fantasy-Premier-League GitHub repository"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    legend.position = "none",
+    strip.text = element_text(face = "bold", size = 11)
+  )
+```
+
+## Key Findings
+
+- **Attacking return on investment:** Midfielders and forwards exhibit the steepest positive slopes, meaning premium prices translate into significantly higher match scores via goals, assists, and bonus points.
+- **Defensive ceilings:** Goalkeepers and defenders display nearly flat trendlines. Higher-priced defenders rarely generate higher individual match totals than budget options, because clean-sheet points depend on overall team defense rather than individual player cost.
+- **Sample scale:** With `r scales::comma(nrow(active_appearances))` match observations, this sample captures both routine weekly appearances and outlier performances across the entire league.
